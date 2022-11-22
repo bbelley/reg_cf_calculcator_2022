@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Reg CF Investor Limit 12-month Calculator
+
+A basic React App for Reg CF investors to calculate your 12 month investor limit based on inputs of income and net worth. SEC investor limits and rules have changed several times in the past few years, so the author makes no guarantees as to the accuracy of the calculation due to updates, bugs, omissions, etc. Please use at your own risk and as a reference only.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
