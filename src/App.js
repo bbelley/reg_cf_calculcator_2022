@@ -1,7 +1,7 @@
 import React from 'react';
 import numeral from 'numeral';
-import { Alert, Button, FormGroup, InputGroup, FormControl, Form, Col, FormLabel } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import cx from 'classnames';
+import styles from './bootstrap.min.module.css';
 
 class RegCFLimitApp extends React.Component {
     constructor(props) {
@@ -78,41 +78,51 @@ class RegCFLimitApp extends React.Component {
     render() {
         return (
             <div align='center' style={{ width: '100%' }} >
-                {this.state.error && <Alert variant="danger" >Please enter your Annual Income and Net Worth. </Alert>}
-                <Form style={{ width: '70%', maxWidth: '500px' }} horizontal id="cf-limit-calculator" onSubmit={this.handleSubmit} autoComplete="off" >
-                    <FormGroup>
-                        <Col componentClass={FormLabel} sm={4}>Annual Income:</Col>
-                        <InputGroup>
-                            <InputGroup.Text>$</InputGroup.Text>
-                            <FormControl
-                                type="text"
-                                name="salary"
-                                placeholder="Income e.g. $60,000 as 60000"
-                                autoFocus
-                                value={this.state.salary}
-                                onChange={this.handleChange}
-                            />
-                            <InputGroup.Text>.00</InputGroup.Text>
-                        </InputGroup>
-                        <Col componentClass={FormLabel} sm={4}>Net Worth:</Col>
-                        <InputGroup>
-                            <InputGroup.Text>$</InputGroup.Text>
-                            <FormControl
-                                type="text"
-                                name="netWorth"
-                                placeholder="Net Worth - e.g. $100,000 as 100000"
-                                value={this.state.netWorth}
-                                onChange={this.handleChange}
-                            />
-                            <InputGroup.Text>.00</InputGroup.Text>
-                        </InputGroup>
+                {this.state.error && <div className={cx(styles.alert, styles['alert-danger'])}>Please enter your Annual Income and Net Worth. </div>}
+                <form className={styles.form} style={{ width: '70%', maxWidth: '500px' }} horizontal id="cf-limit-calculator" onSubmit={this.handleSubmit} autoComplete="off" >
+                    <div className={styles['form-group']}>
+                        <div className={styles.container}>
+                            <div className={styles.row}>
+                                <div className={cx(styles.col, styles['col-sm-4'])}>Annual Income:</div>
+                                <div className={styles.col}>
+                                    <div className={styles['input-group']}>
+                                        <span className={styles['input-group-text']}>$</span>
+                                        <input className={styles['form-control']}
+                                            type="text"
+                                            name="salary"
+                                            placeholder="Income e.g. 60,000"
+                                            autoFocus
+                                            value={this.state.salary}
+                                            onChange={this.handleChange}
+                                        />
+                                        <span className={styles['input-group-text']}>.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.row}>
+                                <div className={cx(styles.col, styles['col-sm-4'])}>Net Worth:</div>
+                                <div className={styles.col}>
+                                    <div className={styles['input-group']}>
+                                        <span className={styles['input-group-text']}>$</span>
+                                        <input className={styles['form-control']}
+                                            type="text"
+                                            name="netWorth"
+                                            placeholder="Net Worth - e.g. 100,000"
+                                            value={this.state.netWorth}
+                                            onChange={this.handleChange}
+                                        />
+                                        <span className={styles['input-group-text']}>.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <br />
-                        <Button type="submit" variant="primary">Calculate Your Limit</Button>
-                    </FormGroup>
-                </Form>
+                        <button className={cx(styles.btn, styles['btn-primary'])} type="submit">Calculate Your Limit</button>
+                    </div>
+                </form>
                 <br />
-                {(!this.state.error && this.state.yourLimit) ? (<Alert variant="success" style={{ width: '90%', maxWidth: '500px' }} >Your 12-month Reg CF investment limit is: <br /><strong> {numeral(this.state.yourLimit).format('$0,0.00')} </strong> </Alert>) : 'Enter values above and click "Calculate Limit"'}
-                {this.state.isAccredited ? <Alert variant="info" style={{ width: '90%', maxWidth: '500px' }}>Note: you appear to meet the requirements for an Accredited Investor. As of March 15, 2021, Accredited Investors no longer have an investment limit under Reg CF.</Alert> : ''}
+                {(!this.state.error && this.state.yourLimit) ? (<div className={cx(styles.alert, styles['alert-primary'])} style={{ width: '90%', maxWidth: '500px' }} >Your 12-month Reg CF investment limit is: <br /><strong> {numeral(this.state.yourLimit).format('$0,0.00')} </strong> </div>) : 'Enter values above and click "Calculate Limit"'}
+                {this.state.isAccredited ? <div className={cx(styles.alert, styles['alert-info'])} style={{ width: '90%', maxWidth: '500px' }}>Note: you appear to meet the requirements for an Accredited Investor. As of March 15, 2021, Accredited Investors no longer have an investment limit under Reg CF.</div> : ''}
             </div>
         );
     }
